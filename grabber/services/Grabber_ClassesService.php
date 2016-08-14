@@ -1,40 +1,14 @@
 <?php
 namespace Craft;
 
-class IdentifyService extends BaseApplicationComponent {
-
-  // For conditions that are dependant on other plugins,
-  // perform a quick check to see if a plugin is installed and enabled
-  public function plugin($name) {
-    $plugin = craft()->plugins->getPlugin($name, false);
-    return $plugin->isInstalled && $plugin->isEnabled;
-  }
-
-  // Used to add a single ID to the body. Strongly assists with CSS styling for specific pages, amongst other things
-  // {{ identify.page }}
-  public function page() {
-    $page = craft()->quick->entry()['slug'];
-    return $this->plugin('quick') && !empty($page) ? $page : 'home';
-  }
-
-  // Define a title if one hasn't already been set
-  public function title() {
-    // TODO: Find a way of loading this after setStatus has been defined from the "quick" plugin
-    // This is so error pages can sucessfully add data to the results array.
-    return $this->plugin('quick') ? craft()->quick->entry()['title'] : 'No Title';
-  }
+class Grabber_ClassesService extends BaseApplicationComponent {
 
   // Any additional classes defined in the template file will also be added to the classes list
   // {% set classes = "404" %}
   public $extraClasses = null;
 
-  // Check to see if you are running locally
-  public function local() {
-    return $_SERVER['REMOTE_ADDR']=='127.0.0.1' ? 1 : 0;
-  }
-
   // Gather information on the current page and define a usefull list of classes
-  // {{ identify.classes }}
+  // {{ grab.classes }}
   public function classes() {
 
     if ($this->plugin('quick')) {

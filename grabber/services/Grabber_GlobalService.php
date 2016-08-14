@@ -1,19 +1,7 @@
 <?php
 namespace Craft;
 
-use Twig_Extension;
-
-class checkfields extends \Twig_Extension {
-
-  public function getName() {
-    return Craft::t('Field Exists');
-  }
-
-  public function getFunctions() {
-    return array(
-      'getGlobal' => new \Twig_Function_Method($this, 'getGlobal'),
-    );
-  }
+class Grabber_GlobalService extends BaseApplicationComponent {
 
   public function getGlobal($data, $handle = 'settings') {
     if (strpos($data, '.')) {
@@ -28,6 +16,7 @@ class checkfields extends \Twig_Extension {
       if ($global != null && !empty($global)) {
         return craft()->globals->getSetByHandle($handle)->$field;
       }
-    } 
+    }
   }
+
 }

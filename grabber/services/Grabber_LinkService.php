@@ -1,23 +1,7 @@
 <?php
 namespace Craft;
 
-use Twig_Extension;
-use Twig_Filter_Method;
-
-class link extends \Twig_Extension {
-
-  public function getName() {
-    return Craft::t('Link');
-  }
-
-  public function getFilters() {
-    return array(
-      'link' => new Twig_Filter_Method( $this, 'linkFilter', array('is_safe' => array('html')))
-    );
-  }
-
-  // Usage: {{ "We're Hiring"|link(quick.entry('vacancies').url) }}
-  // Todo: If a link doesn't exist, don't create an <a> link
+class Grabber_LinkService extends BaseApplicationComponent {
 
   public function linkFilter($html, $href='/', $classes=null, $target=null) {
 
@@ -41,4 +25,5 @@ class link extends \Twig_Extension {
 
     }
   }
+
 }
