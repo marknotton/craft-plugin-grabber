@@ -5,11 +5,12 @@ class Grabber_ClassesService extends BaseApplicationComponent {
 
   // Any additional classes defined in the template file will also be added to the classes list
   // {% set classes = "404" %}
-  public $extraClasses = null;
+  public $extraClasses = 'no-extra-classes';
 
   // Gather information on the current page and define a usefull list of classes
   // {{ grab.classes }}
   public function classes() {
+    return $this->extraClasses;
 
     if ($this->plugin('quick')) {
       $entry = craft()->quick->entry();

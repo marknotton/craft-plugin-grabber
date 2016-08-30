@@ -42,7 +42,9 @@ class Grabber_EntryService extends BaseApplicationComponent {
         $id = func_get_arg(0);
       }
 
-      foreach (array_slice(func_get_args(), 1) as &$setting) {
+      $arguments = array_slice(func_get_args(), 1);
+
+      foreach ($arguments as &$setting) {
         if ( gettype($setting) == 'string' ) {
           $section = $setting;
         }

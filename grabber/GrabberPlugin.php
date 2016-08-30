@@ -2,6 +2,7 @@
 namespace Craft;
 
 class GrabberPlugin extends BasePlugin {
+
   public function getName() {
     return Craft::t('Grabber');
   }
@@ -34,37 +35,35 @@ class GrabberPlugin extends BasePlugin {
     return 'https://raw.githubusercontent.com/marknotton/craft-plugin-grabber/master/grabber/releases.json';
   }
 
+  public function addTwigExtension() {
+    Craft::import('plugins.grabber.twigextensions.setGlobalVariables');
+    return array(
+      new setGlobalVariables()
+    );
+  }
+
+  public function getSettingsHtml() {
+    return craft()->templates->render('grabber/settings', array(
+      'settings' => $this->getSettings()
+    ));
+  }
+
+  protected function defineSettings() {
+    return array(
+      'directory' => array(AttributeType::String, 'default' => ''),
+    );
+  }
+
   public function init() {
     if (!craft()->isConsole() && !craft()->request->isCpRequest())  {
-
-      $videos = isset(craft()->config->get('environmentVariables')["videos"]) ? craft()->config->get('environmentVariables')["videos"] : null;
-      $images = isset(craft()->config->get('environmentVariables')["images"]) ? craft()->config->get('environmentVariables')["images"] : null;
-      $js     = isset(craft()->config->get('environmentVariables')["js"])     ? craft()->config->get('environmentVariables')["js"]     : null;
-      $css    = isset(craft()->config->get('environmentVariables')["css"])    ? craft()->config->get('environmentVariables')["css"]    : null;
-
-      craft()->urlManager->setRouteVariables(
-        array(
-          'grab'   => craft()->grabber,
-          'title'  => craft()->grabber->title(),
-          'images' => isset($images) ? $images : "/assets/images",
-          'videos' => isset($images) ? $images : "/assets/videos",
-          'js'     => isset($js) ? $js : "/assets/js",
-          'css'    => isset($css) ? $css : "/assets/css"
-        )
-      );
-
       craft()->templates->hook('settings', function(&$context) {
-        // craft()->quick->setStatus();
-        $routeParams = craft()->urlManager->getRouteParams();
-        if (isset($routeParams['variables'])) {
-          $context = array_merge($context, $routeParams['variables']);
-
-          //if (isset($context['classes'])) {
-            //craft()->grabber->extraClasses = $context['classes'];
-          //}
+        if (isset($context['classes'])) {
+          craft()->grabber_classes->extraClasses = $context['classes'];
         }
+        // if (isset($context['settings'])) {
+        //   craft()->grabber_settings->settings = $context['settings'];
+        // }
       });
-
     }
   }
-}
+};

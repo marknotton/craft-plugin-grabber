@@ -30,10 +30,6 @@ class GrabberVariable {
     return craft()->grabber->title(func_get_args());
   }
 
-  public function classes() {
-    return craft()->grabber->classes(func_get_args());
-  }
-
   public function global() {
     return craft()->grabber->global(func_get_args());
   }

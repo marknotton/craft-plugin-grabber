@@ -5,7 +5,8 @@ class GrabberService extends BaseApplicationComponent {
 
 
     public $status = null;
-    private $cacheSection = [];
+    //public $settings = null;
+
     private $errors = [
       '400'=>'Bad Request',
       '403'=>'Forbidden',
@@ -19,11 +20,11 @@ class GrabberService extends BaseApplicationComponent {
     }
 
       // Return global data
-    public function getGlobal($handle, $set = "settings") {
-      if ( isset(craft()->globals->getSetByHandle($set)->$handle)) {
-        return craft()->globals->getSetByHandle($set)->$handle;
-      }
-    }
+    // public function getGlobal($handle, $set = "settings") {
+    //   if ( isset(craft()->globals->getSetByHandle($set)->$handle)) {
+    //     return craft()->globals->getSetByHandle($set)->$handle;
+    //   }
+    // }
 
   public function plugin() {
     return craft()->grabber_plugin(func_get_args());
@@ -54,7 +55,7 @@ class GrabberService extends BaseApplicationComponent {
   }
 
   public function classes() {
-    return craft()->grabber_classes(func_get_args());
+    return craft()->grabber_classes->classes();
   }
 
   public function global() {
@@ -65,8 +66,7 @@ class GrabberService extends BaseApplicationComponent {
     return craft()->grabber_link(func_get_args());
   }
 
-
-
-
-
+  // public function settings() {
+  //   return craft()->grabber_settings->settings;
+  // }
 }

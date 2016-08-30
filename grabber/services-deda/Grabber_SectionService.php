@@ -2,6 +2,7 @@
 namespace Craft;
 
 class Grabber_SectionService extends BaseApplicationComponent {
+  private $cacheSection = [];
 
   // Grab an array of commonly useed Section data by defining just the id or slug and the entries given section
   // section - Returns {array}  - Entry section name

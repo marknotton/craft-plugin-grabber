@@ -1,0 +1,10 @@
+{% import "_includes/forms" as forms %}
+<h2>Settings File Location</h2>
+{{ forms.textField({
+  label: "Enter the directory your settings twig file is stored. This will be relative to your craft/templates directory. Default is '_includes/settings.twig'."|t,
+  id: 'directory',
+  name: 'directory',
+  placeholder: '_includes/settings.twig',
+  value: settings.directory,
+  errors: settings.getErrors('directory'),
+}) }}
