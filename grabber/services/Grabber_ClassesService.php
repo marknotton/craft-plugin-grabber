@@ -58,6 +58,12 @@ class Grabber_ClassesService extends BaseApplicationComponent {
       array_push($classes, 'local');
     }
 
+    $pageNumber = craft()->request->getPageNum();
+
+    if ( $pageNumber > 1 ) {
+      array_push($classes, 'page-number-'.craft()->request->getPageNum());
+    }
+
     // Device Type
     if (craft()->grabber_plugin->plugin('browser')) {
       $desktop = craft()->browser->agent->isDesktop();
@@ -65,13 +71,8 @@ class Grabber_ClassesService extends BaseApplicationComponent {
       $tablet  = craft()->browser->agent->isTablet();
 
       $device = ElementHelper::createSlug(craft()->browser->agent->device());
+      $device = $device === 'macintosh' ? 'mac' : $device;
       array_push($classes, $device);
-
-      $pageNumber = craft()->request->getPageNum();
-
-      if ( $pageNumber > 1 ) {
-        array_push($classes, 'page-number-'.craft()->request->getPageNum());
-      }
 
       if ( $desktop ) { array_push($classes, 'desktop'); }
       else if ( $tablet ) { array_push($classes, 'tablet'); }
