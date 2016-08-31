@@ -3,10 +3,10 @@ namespace Craft;
 
 use Twig_Extension;
 
-class setGlobalVariables extends \Twig_Extension {
+class grabber_globals extends \Twig_Extension {
 
   public function getName() {
-    return Craft::t('Set Global Variables');
+    return Craft::t('Grabber Globals');
   }
 
   public function getGlobals() {
@@ -16,6 +16,7 @@ class setGlobalVariables extends \Twig_Extension {
       'images'   => isset(craft()->config->get('environmentVariables')["images"]) ? craft()->config->get('environmentVariables')["images"] : "/assets/videos",
       'js'       => isset(craft()->config->get('environmentVariables')["js"])     ? craft()->config->get('environmentVariables')["js"]     : "/assets/js",
       'css'      => isset(craft()->config->get('environmentVariables')["css"])    ? craft()->config->get('environmentVariables')["css"]    : "/assets/css",
+      'title'    => craft()->grabber_entry->entry()['title'],
       // 'settings' => craft()->grabber_settings->settings()
     );
     // $settings = $globals['settings'];

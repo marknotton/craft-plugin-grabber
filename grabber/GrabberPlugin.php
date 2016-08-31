@@ -36,23 +36,25 @@ class GrabberPlugin extends BasePlugin {
   }
 
   public function addTwigExtension() {
-    Craft::import('plugins.grabber.twigextensions.setGlobalVariables');
+    Craft::import('plugins.grabber.twigextensions.link');
+    Craft::import('plugins.grabber.twigextensions.grabber_globals');
     return array(
-      new setGlobalVariables()
+      new link(),
+      new grabber_globals()
     );
   }
 
-  public function getSettingsHtml() {
-    return craft()->templates->render('grabber/settings', array(
-      'settings' => $this->getSettings()
-    ));
-  }
+  // public function getSettingsHtml() {
+  //   return craft()->templates->render('grabber/settings', array(
+  //     'settings' => $this->getSettings()
+  //   ));
+  // }
 
-  protected function defineSettings() {
-    return array(
-      'directory' => array(AttributeType::String, 'default' => ''),
-    );
-  }
+  // protected function defineSettings() {
+  //   return array(
+  //     'directory' => array(AttributeType::String, 'default' => ''),
+  //   );
+  // }
 
   public function init() {
     if (!craft()->isConsole() && !craft()->request->isCpRequest())  {

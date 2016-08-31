@@ -9,7 +9,7 @@ class Grabber_EntryService extends BaseApplicationComponent {
 
     // $id      = id or slug
     // $section = section or category group
-    // $full    = if 'true', the entire given entry object will be returned, rather than the common attributes
+    // $full    = if 'true', the entire given entry object will be returned, rather than common attributes
 
     // {{ quick.entry(2)['title'] }} - Returns homepage title
     // {{ quick.entry('about', '')['title'] }} - Returns homepage title
@@ -45,12 +45,13 @@ class Grabber_EntryService extends BaseApplicationComponent {
       $arguments = array_slice(func_get_args(), 1);
 
       foreach ($arguments as &$setting) {
-        if ( gettype($setting) == 'string' ) {
-          $section = $setting;
-        }
-
-        if ( gettype($setting) == 'boolean' ) {
-          $full = $setting;
+        switch (gettype($setting)) {
+          case 'string':
+            $section = $setting;
+          break;
+          case 'boolean':
+            $full = $setting;
+          break;
         }
       }
 
@@ -136,7 +137,7 @@ class Grabber_EntryService extends BaseApplicationComponent {
                 $section = $entry->section;
                 // echo "<pre>"; var_dump($section); echo "</pre>";  die();
                 $results['type'] = $entry->getType()->name;
-                $results['section'] = $this->section($section->handle);
+                $results['section'] = craft()->grabber_section->section($section->handle);
               }
 
               // Category specific data
@@ -154,7 +155,7 @@ class Grabber_EntryService extends BaseApplicationComponent {
             } else {
               // If the entry is not found, use the slug or id from the first param
               // to try and find a section instead.
-              $section = $this->section($id);
+              $section = craft()->grabber_section->section($id);
               if (!is_null($section)) {
                 return $section;
               } else {
@@ -215,9 +216,17 @@ class Grabber_EntryService extends BaseApplicationComponent {
             ];
           }
 
+          $errors = [
+            '400'=>'Bad Request',
+            '403'=>'Forbidden',
+            '404'=>'Page Not Found',
+            '500'=>'Internal Server Error',
+            '503'=>'Maintenance'
+          ];
+
           // Error page checks
-          foreach ($this->errors as $error => $value) {
-            if ($this->status == $error) {
+          foreach ($errors as $error => $value) {
+            if (http_response_code() == $error) {
               $results['error'] = $error;
               $results['title'] = $results['title'].' | '.(craft()->config->get('devMode') ? $error.' - ' : '').$value;
             }

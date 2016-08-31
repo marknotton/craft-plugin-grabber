@@ -50,7 +50,7 @@ class Grabber_SectionService extends BaseApplicationComponent {
       } else {
         // When a section doesn't technically exist, create faux results.
 
-        if (is_string($id)) {
+        if (is_string($id) || is_int($id)) {
 
           $title = str_replace(['_', '-'], ' ', $id);
 
