@@ -1,14 +1,13 @@
-z<img src="http://i.imgur.com/fw4Euqk.png" alt="Grabber" align="left" height="60" />
+<img src="http://i.imgur.com/fw4Euqk.png" alt="Grabber" align="left" height="60" />
 
 # Grabber *for Craft CMS*
 Grabber adds numerous methods to quickly grab useful content
 
 ##Table of Contents
 
-- [Classes](#)
-  - [Settings](#)
-  - [Example](#)
-  - [Additional Classes](#)
+- [Classes](#classes)
+  - [Example](#example)
+  - [Additional Classes](#additional-classes)
 - [Content](#)
   - [Settings](#)
   - [Examples](#)
@@ -37,7 +36,7 @@ Grabber adds numerous methods to quickly grab useful content
 
 ## Classes
 
-**Classes** will automatically collect a list of useful classes bespoke to users current page:
+Classes will automatically collect a list of useful classes bespoke to users current page, and return them as a string:
 
 | Example        | Description
  --------------- | ---------------------
@@ -72,3 +71,43 @@ If you want to add additional classes from the template side of things; you can 
 {% set classes = "extra-class" %}
 {% hook 'grabber' %}
 ```
+
+----
+## Content
+
+Coming Soon
+
+----
+## Entry
+
+Coming Soon
+
+----
+## Global
+
+Coming Soon
+
+----
+## Link
+
+Coming Soon
+
+----
+## Page
+
+Coming Soon
+
+----
+## Plugin
+
+Coming Soon
+
+----
+## Section
+
+Coming Soon
+
+----
+## Globals
+
+Coming Soon
