@@ -72,6 +72,7 @@ class Grabber_EntryService extends BaseApplicationComponent {
           // $id = craft()->urlManager->getMatchedElement()->id;
         // }
 
+
       // If the cache name doesn't exist in the cache,
       // Then create and store the results.
       if (!array_key_exists($cache_name, $this->cacheEntry)) {

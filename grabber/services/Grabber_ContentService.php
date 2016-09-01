@@ -29,9 +29,9 @@ class Grabber_ContentService extends BaseApplicationComponent {
       $field = 'body';
     }
 
-    $entry = craft()->grabber_entry->entry($id, $section, false);
+    $entry = craft()->grabber_entry->entry($id, $section, true);
 
-    if (isset($entry) && isset($field)) {
+    if (isset($entry) && isset($entry[$field])) {
       return $entry[$field];
     }
   }
