@@ -217,7 +217,7 @@ These are the associative array options:
 
 Similar to grab.link, this twig extension allows you to wrap any content in a link... if it exists.
 
-### Example
+### Examples
 
 #### Example 2:
 ```
