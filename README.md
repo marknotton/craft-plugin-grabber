@@ -86,9 +86,15 @@ If you want to add additional classes from the template side of things; you can 
 
 Grab a specific field from a particular entry.
 
-First parameter must be the field handle. Second should be either the entry handle or id. The third parameter is optional and is for the section type. Results will be more accurate if this if defined since it's possible to have the same entry slug accross mutliple sections. Ommitting this will return the first instance a sucessful entry handle match.
+| Parameter            | Type              | Default          | Description
+ --------------------- | ----------------- | ---------------- | -----------
+| field handle         | string            | null             | Enter the field handle
+| entry slug or ID     | string or integer | current entry ID | Should be either the entry handle or id.
+| section handle or ID | string or integer | null             | [optional] The third parameter is optional and is for the section type. Results will be more accurate if the section is defined since it's possible to have the same entry slug across multiple sections. Omitting this will return the first instance of a successful entry handle match.
 
-// {{ grab.content('gallery', 405)}}
+```
+{{ grab.content('gallery', 405, 'blog') }}
+```
 
 ----
 ## Entry
