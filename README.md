@@ -87,7 +87,7 @@ If you want to add additional classes from the template side of things; you can 
 Grab a specific field from a particular entry.
 
 | # | Parameter            | Type              | Default          | Description
-| - | -------------------- | ----------------- | ---------------- | -----------
+--- | -------------------- | ----------------- | ---------------- | -----------
 | 1 | field handle         | string            | null             | The field slug
 | 2 | entry slug or ID     | string or integer | current entry ID | Should be either the entry handle or id.
 | 3 | section handle or ID | string or integer | null             | [optional] The third parameter is optional and is for the section type. Results will be more accurate if the section is defined since it's possible to have the same entry slug across multiple sections. Omitting this will return the first instance of a successful entry handle match.
@@ -103,7 +103,7 @@ Grab a specific field from a particular entry.
 Grab an array of commonly used Entry data by defining just the id or slug and the entries given section if required.
 
 | # | Parameter            | Type              | Default          | Description
-| - | -------------------- | ----------------- | ---------------- | -----------
+--- | -------------------- | ----------------- | ---------------- | -----------
 | 1 | entry slug or ID     | string or integer | null             | The field slug
 | 2 | section handle or ID | string or integer | current entry ID | [optional] The section handle
 | 3 | true or false        | boolean           | false            | [optional] If ```true```, the entire given entry object will be returned, rather than common attributes
