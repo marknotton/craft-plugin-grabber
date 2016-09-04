@@ -217,6 +217,8 @@ Example 1: Output
 
 Similar to grab.link, this twig extension allows you to wrap any content in a link... if it exists.
 
+### Example
+
 Example 2:
 ```
 {{ "We're Hiring"|link('contact') }}
