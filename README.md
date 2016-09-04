@@ -198,7 +198,7 @@ These are the associative array options:
 
 ### Example
 
-Example 1:
+#### Example 1:
 ```
 {{ entry.body|link('contact', {
   'relative' : true,
@@ -208,7 +208,7 @@ Example 1:
 }) }}
 ```
 
-Example 1: Output
+#### Example 1: Output
 ```
 <a href="/contact" class="someClass" target="_blank" title="Bespoke Title">Bespoke Title</a>
 ```
@@ -219,22 +219,22 @@ Similar to grab.link, this twig extension allows you to wrap any content in a li
 
 ### Example
 
-Example 2:
+#### Example 2:
 ```
 {{ "We're Hiring"|link('contact') }}
 ```
 
-Example 2: Output
+#### Example 2: Output
 ```
 <a href="/contact">We're Hiring</a>
 ```
 
-Example 3:
+#### Example 3:
 ```
 {{ entry.featured.first()|link('contact') }}
 ```
 
-Example 4: Output
+#### Example 4: Output
 ```
 <a href="/contact"><img src="..." alt="..."></a>
 ```
