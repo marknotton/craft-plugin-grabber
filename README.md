@@ -20,8 +20,8 @@ Grab an array of commonly used Entry data by defining just the id or slug and th
 
 | # | Parameter            | Type              | Default          | Description
 --- | -------------------- | ----------------- | ---------------- | -----------
-| 1 | entry slug or ID     | string or integer | null             | The field slug
-| 2 | section handle or ID | string or integer | current entry ID | [optional] The section handle
+| 1 | entry slug or ID     | string or integer | null             | Entry slug or ID
+| 2 | section handle or ID | string or integer | current entry ID | [optional] The section handle or ID
 | 3 | true or false        | boolean           | false            | [optional] If ```true```, the entire given entry object will be returned, rather than common attributes
 
 The first time an entry is queried, it will be cached. So any additional queries to the same entry per page load will revert to the cached version.
@@ -89,7 +89,7 @@ Grab a specific field from a particular entry.
 
 | # | Parameter            | Type              | Default          | Description
 --- | -------------------- | ----------------- | ---------------- | -----------
-| 1 | field handle         | string            | null             | The field slug
+| 1 | field slug           | string            | null             | The field slug
 | 2 | entry slug or ID     | string or integer | current entry ID | Should be either the entry handle or id.
 | 3 | section handle or ID | string or integer | null             | [optional] The third parameter is optional and is for the section type. Results will be more accurate if the section is defined since it's possible to have the same entry slug across multiple sections. Omitting this will return the first instance of a successful entry handle match.
 
@@ -179,8 +179,63 @@ Grab global data from a specific set. This will perform a few checks to ensure t
 
 ## Link
 
-Coming Soon
+Grabs an entry link if it exists and is enabled, and outputs a correctly formatted ```a``` tag.
 
+| # | Parameter         | Type              | Description
+--- | ----------------- | ----------------- | -----------
+| 1 | Entry slug or ID  | string or integer | Entry slug or ID
+| 2 | Array of settings | array             | [optional] Array of optional settings to refine the output
+
+These are the associative array options:
+
+| Option   | Type    | Description
+| -------- | ------- | -----------
+| relative | boolean | If true, a relative link will be returned. False, and a absolute URL will be used.
+| classes  | string  | Add a class to the ```a``` tag
+| target   | string  | '_blank', '_self', '_parent', '_top' transformgets can be used.
+| title    | string  | Add a bespoke title. By default, the entry title will be used.
+
+
+### Example
+
+Example 1:
+```
+{{ entry.body|link('contact', {
+  'relative' : true,
+  'classes'  : 'someClass',
+  'target'   : '_blank',
+  'title'    : 'Bespoke Title',
+}) }}
+```
+
+Example 1: Output
+```
+<a href="/contact" class="someClass" target="_blank" title="Bespoke Title">Bespoke Title</a>
+```
+
+### Twig Extension
+
+Similar to grab.link, this twig extension allows you to wrap any content in a link... if it exists.
+
+Example 2:
+```
+{{ "We're Hiring"|link('contact') }}
+```
+
+Example 2: Output
+```
+<a href="/contact">We're Hiring</a>
+```
+
+Example 3:
+```
+{{ entry.featured.first()|link('contact') }}
+```
+
+Example 4: Output
+```
+<a href="/contact"><img src="..." alt="..."></a>
+```
 
 ----
 

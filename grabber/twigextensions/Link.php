@@ -16,19 +16,6 @@ class link extends \Twig_Extension {
     );
   }
 
-  // Similar to grab.link, this twig exention allows you to wrap any content in a link... if it exists.
-
-  // {{ entry.body|link('contact', {
-  //    'relative' : true,
-  //    'classes'  : 'someClass',
-  //    'target'   : '_blank',
-  //    'title'    : 'Bespoke Title',
-  // }) }}
-
-  // <a href="/contact" class="someClass" target="_blank" title="Bespoke Title">
-  //  Any HTML content
-  //</a>
-
   public function link() {
     // Atleast one single string arugment should be passed
     if ( func_num_args() >= 1 ){
