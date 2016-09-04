@@ -7,9 +7,8 @@ class GrabberService extends BaseApplicationComponent {
     return craft()->grabber_plugin->plugin($pluginHandle);
   }
 
-  public function content() {
-    $args = func_get_args();
-    return call_user_func_array(array(craft()->grabber_content, 'content'), $args);
+  public function content($field = 'body', $id = null, $section = null) {
+    return craft()->grabber_content->content($field, $id, $section);
   }
 
   public function section() {
