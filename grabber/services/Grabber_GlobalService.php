@@ -3,11 +3,6 @@ namespace Craft;
 
 class Grabber_GlobalService extends BaseApplicationComponent {
 
-
-  // {{ grab.global('facebook', 'social')}}
-  // {{ grab.global('facebook')}}
-  //
-  // You can also pass in the global element ID if necessary
   public function global() {
 
     $field = null;

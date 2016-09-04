@@ -3,11 +3,13 @@ namespace Craft;
 
 class Grabber_PluginService extends BaseApplicationComponent {
 
-  // For conditions that are dependant on other plugins,
-  // perform a quick check to see if a plugin is installed and enabled
-  public function plugin($pluginHandle) {
+  public function plugin($pluginHandle, $enabled = true) {
     if ($plugin = craft()->plugins->getPlugin($pluginHandle, false)) {
-      return $plugin->isInstalled && $plugin->isEnabled;
+      if ($enabled) {
+        return $plugin->isInstalled && $plugin->isEnabled;
+      } else {
+        return $plugin->isInstalled;
+      }
     }
   }
 

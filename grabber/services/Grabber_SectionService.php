@@ -4,15 +4,7 @@ namespace Craft;
 class Grabber_SectionService extends BaseApplicationComponent {
   private $cacheSection = [];
 
-  // Grab an array of commonly useed Section data by defining just the id or slug and the entries given section
-  // section - Returns {array}  - Entry section name
-  // title {string}  -  Section title
-  // name {string}   -  Section name
-  // id {string}     -  Section ID
-  // handle {string} -  Section handle
-  // type {string}   -  Section Type - Channel, Structure, or Single
-  // url {string}    -  Section absolute url
-  // uri {string}    -  Section relative url
+
   public function section($id) {
     // Create a unique name for caching
     $cache_name = empty($id) ? 'current' : (string)$id;
