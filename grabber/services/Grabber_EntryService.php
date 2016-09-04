@@ -5,32 +5,6 @@ class Grabber_EntryService extends BaseApplicationComponent {
 
     private $cacheEntry = [];
 
-    // Grab an array of commonly useed Entry data by defining just the id or slug and the entries given section
-
-    // $id      = id or slug
-    // $section = section or category group
-    // $full    = if 'true', the entire given entry object will be returned, rather than common attributes
-
-    // {{ quick.entry(2)['title'] }} - Returns homepage title
-    // {{ quick.entry('about', '')['title'] }} - Returns homepage title
-
-    // Returns an array of usable information. This is cached the first time it is called.
-    // So no additial queries or http requests will trigger should the same criteria be used on the same page more than once
-    // id      - Returns {string} - Entry ID
-    // title   - Returns {string} - Entry title
-    // slug    - Returns {string} - Entry slug
-    // url     - Returns {string} - Entry absolute url
-    // uri     - Returns {string} - Entry relative url
-    // snippet - Returns {string} - Entry Snippet
-    // status  - Returns {string} - Entry status
-    // level   - Returns {string} - Entry hiarchy level
-    // parent  - Returns {bool}   - Checks if entry has a parent
-    // child   - Returns {bool}   - Checks if entry has a child
-    // type    - Returns {string} - Returns Channel, Structure, Single, or Category
-    // section - Returns {array}  - Entry section details. See section function above
-
-    // Reverts to 'best-guess' fallbacks if special circomstance arise, like 404 error pages, or page exist but not in the cms
-
     public function entry() {
 
       $id      = null;
