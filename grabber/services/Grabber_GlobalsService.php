@@ -1,19 +1,11 @@
 <?php
 namespace Craft;
 
-class Grabber_GlobalService extends BaseApplicationComponent {
+class Grabber_GlobalsService extends BaseApplicationComponent {
 
-  public function global() {
+  public function globals($field = null, $set = null) {
 
-    $field = null;
-    $set   = null;
-
-    if ( func_num_args() == 1 ){
-      $field = func_get_arg(0);
-    } else if ( func_num_args() == 2 ){
-      $field = func_get_arg(0);
-      $set    = func_get_arg(1);
-    } else {
+    if ( is_null($field) && is_null($set) ) {
       return false;
     }
 

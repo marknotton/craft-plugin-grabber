@@ -29,9 +29,8 @@ class GrabberService extends BaseApplicationComponent {
     return craft()->grabber_classes->classes();
   }
 
-  public function global() {
-    $args = func_get_args();
-    return call_user_func_array(array(craft()->grabber_global, 'global'), $args);
+  public function globals($field = null, $set = null) {
+    return craft()->grabber_globals->globals($field, $set);
   }
 
   public function link() {

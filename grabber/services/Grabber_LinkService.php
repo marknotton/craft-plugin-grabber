@@ -95,7 +95,7 @@ class Grabber_LinkService extends BaseApplicationComponent {
       $link .= $title;
       $link .= '</a>';
 
-      echo $link;
+      return $link;
 
     }
   }
