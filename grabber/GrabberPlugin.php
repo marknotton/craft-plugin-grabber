@@ -58,6 +58,7 @@ class GrabberPlugin extends BasePlugin {
 
   public function init() {
     if (!craft()->isConsole() && !craft()->request->isCpRequest())  {
+
       craft()->templates->hook('grabber', function(&$context) {
         if (isset($context['classes'])) {
           craft()->grabber_classes->extraClasses = $context['classes'];
