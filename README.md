@@ -264,7 +264,7 @@ Returns the current page title and site name in a 75 character limit format suit
 | # | Parameter            | Type              | Default          | Description
 --- | -------------------- | ----------------- | ---------------- | -----------
 | 1 | page title           | string            | null             | [optional] Will attempt to grab the current entry title. Or a string can be used as a title instead.
-| 2 | separator            | string            | '|'              | [optional] Define a string that will sit between the site name and page title. Usually a single special character.
+| 2 | separator            | string            | ```|```          | [optional] Define a string that will sit between the site name and page title. Usually a single special character.
 | 3 | site name            | string            | siteName         | [optional] The default siteName will be used if one is not provided.
 | 4 | order                | boolean           | true             | [optional] If ```true```, the entry title will come first. If ```false```, the site name will come first.
 
