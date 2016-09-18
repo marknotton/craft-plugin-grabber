@@ -10,6 +10,7 @@ class Grabber_EntryService extends BaseApplicationComponent {
       $id      = null;
       $section = null;
       $full    = false;
+      $cacheIt  = false;
 
       // Atleast one single string arugment should be passed
       if ( func_num_args() >= 1 ){
@@ -24,7 +25,11 @@ class Grabber_EntryService extends BaseApplicationComponent {
             $section = $setting;
           break;
           case 'boolean':
-            $full = $setting;
+            if ($setting === true) {
+              $full = $setting;
+            } else if ($setting === false) {
+              $cacheIt = $setting;
+            }
           break;
         }
       }
@@ -40,16 +45,9 @@ class Grabber_EntryService extends BaseApplicationComponent {
         $cache_name = (string)$id.$section;
       }
 
-      // echo func_get_arg(0);
-      // echo is_numeric($id) ? '1' : '2';
-        // if ( empty($id)) {
-          // $id = craft()->urlManager->getMatchedElement()->id;
-        // }
-
-
       // If the cache name doesn't exist in the cache,
       // Then create and store the results.
-      if (!array_key_exists($cache_name, $this->cacheEntry)) {
+      if (!array_key_exists($cache_name, $this->cacheEntry) || $cacheIt === false) {
 
         // echo "<br>This entry was queried just once: ".$cache_name."<br>";
 

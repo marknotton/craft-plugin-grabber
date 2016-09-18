@@ -25,6 +25,10 @@ class GrabberService extends BaseApplicationComponent {
     return craft()->grabber_page->page();
   }
 
+  public function title($title = null, $seperator = '|', $sitename = null, $order = true) {
+    return craft()->grabber_title->title($title, $seperator, $sitename, $order);
+  }
+
   public function classes() {
     return craft()->grabber_classes->classes();
   }

@@ -13,6 +13,7 @@ Grabber adds numerous methods to quickly grab useful content
 - [Global](#global)
 - [Link](#link)
 - [Plugin](#plugin)
+- [Title](#title)
 
 ## Entry
 
@@ -22,7 +23,7 @@ Grab an array of commonly used Entry data by defining just the id or slug and th
 --- | -------------------- | ----------------- | ---------------- | -----------
 | 1 | entry slug or ID     | string or integer | null             | Entry slug or ID
 | 2 | section handle or ID | string or integer | current entry ID | [optional] The section handle or ID
-| 3 | true or false        | boolean           | false            | [optional] If ```true```, the entire given entry object will be returned, rather than common attributes
+| 3 | true or false        | boolean           | true             | [optional] If ```true```, the entire given entry object will be returned, rather than common attributes. If ```false```, a cached version will not be used.
 
 The first time an entry is queried, it will be cached. So any additional queries to the same entry per page load will revert to the cached version.
 
@@ -252,4 +253,27 @@ Returns a boolean after checking if a plugin is installed and enabled.
 Returns a boolean after checking if a plugin is installed only.
 ```
 {{ grab.plugin('pluginName', true) }}
+```
+
+----
+
+## Title
+
+Returns the current page title and site name in a 75 character limit format suitable for SEO.
+
+| # | Parameter            | Type              | Default          | Description
+--- | -------------------- | ----------------- | ---------------- | -----------
+| 1 | page title           | string            | null             | [optional] Will attempt to grab the current entry title. Or a string can be used as a title instead.
+| 2 | separator            | string            | '|'              | [optional] Define a string that will sit between the site name and page title. Usually a single special character.
+| 3 | site name            | string            | siteName         | [optional] The default siteName will be used if one is not provided.
+| 4 | order                | boolean           | true             | [optional] If ```true```, the entry title will come first. If ```false```, the site name will come first.
+
+#### Example 1:
+```
+{{ grab.title }}
+```
+
+#### Example 2:
+```
+{{ grab.title('Welcome to my site', '-', false) }}
 ```
