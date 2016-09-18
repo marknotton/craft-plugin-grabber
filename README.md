@@ -1,6 +1,7 @@
-<img src="http://i.imgur.com/fw4Euqk.png" alt="Grabber" align="left" height="60" />
+<img src="http://i.imgur.com/eBhYqZW.png" alt="Grabber" align="left" height="60" />
 
 # Grabber *for Craft CMS*
+
 Grabber adds numerous methods to quickly grab useful content
 
 ##Table of Contents
