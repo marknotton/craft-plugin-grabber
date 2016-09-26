@@ -19,7 +19,7 @@ class Grabber_TitleService extends BaseApplicationComponent {
 
     $title = is_null($title) ? craft()->grabber_entry->entry(null, null, false)['title'] : $title;
 
-    if ( $title == 'home' || $title == 'homepage' || empty($title) ) {
+    if ( strtolower($title) == 'home' || strtolower($title) == 'homepage' || empty($title) ) {
       $title = null;
       $seperator = null;
     }
