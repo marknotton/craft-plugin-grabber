@@ -54,9 +54,7 @@ class Grabber_EntryService extends BaseApplicationComponent {
         if ( is_null($id) && $cache_name == 'current' && isset(craft()->urlManager->getMatchedElement()->id)) {
           $id = (int)craft()->urlManager->getMatchedElement()->id;
           // echo "new id set:".$id;
-        } else {
-
-        }
+        } 
 
         if (!empty($id)) {
 
@@ -65,6 +63,7 @@ class Grabber_EntryService extends BaseApplicationComponent {
           $type = 'Entry';
 
           if ( isset($type) && $type == "Category") {
+            echo "1";
             $criteria = craft()->elements->getCriteria(ElementType::Category);
           } else {
             $criteria = craft()->elements->getCriteria(ElementType::Entry);

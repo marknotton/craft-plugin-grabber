@@ -31,11 +31,13 @@ class Grabber_ClassesService extends BaseApplicationComponent {
     // Get Entry Information
     while (list($key, $value) = each($entryInfo)) {
       // echo $key.' - '.$value;
-      if (is_numeric($entry[$value])) {
-        array_push($classes, strtolower($value.'-'.$entry[$value]));
-      } else {
-        if ($entry[$value] != $page) {
-          array_push($classes, strtolower($entry[$value]));
+      if (isset($entry[$value])) {
+        if (is_numeric($entry[$value])) {
+          array_push($classes, strtolower($value.'-'.$entry[$value]));
+        } else {
+          if ($entry[$value] != $page) {
+            array_push($classes, strtolower($entry[$value]));
+          }
         }
       }
     }

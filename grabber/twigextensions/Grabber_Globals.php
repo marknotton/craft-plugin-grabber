@@ -3,26 +3,42 @@ namespace Craft;
 
 use Twig_Extension;
 
-class grabber_globals extends \Twig_Extension {
+class Grabber_Globals extends \Twig_Extension {
 
   public function getName() {
     return Craft::t('Grabber Globals');
   }
 
   public function getGlobals() {
+
+    // Default values to add
     $globals = array(
       'grab'     => craft()->grabber,
-      'videos'   => isset(craft()->config->get('environmentVariables')["videos"]) ? craft()->config->get('environmentVariables')["videos"] : "/assets/images",
-      'images'   => isset(craft()->config->get('environmentVariables')["images"]) ? craft()->config->get('environmentVariables')["images"] : "/assets/videos",
-      'js'       => isset(craft()->config->get('environmentVariables')["js"])     ? craft()->config->get('environmentVariables')["js"]     : "/assets/js",
-      'css'      => isset(craft()->config->get('environmentVariables')["css"])    ? craft()->config->get('environmentVariables')["css"]    : "/assets/css",
-      'title'    => craft()->grabber_entry->entry()['title'],
-      // 'settings' => craft()->grabber_settings->settings()
+      'title'    => craft()->grabber_entry->entry()['title']
     );
-    // $settings = $globals['settings'];
 
-    $globals = !empty($settings) && !is_null($settings) ? array_merge($globals, $settings) : $globals;
+    // Get plugin settings 'globalVariablesName'
+    $GVSettings = craft()->plugins->getPlugin('grabber')->getSettings()['globalVariablesName'];
 
-    return $globals;
+    // Check settings are not empty or revert to default
+    $GVName = !empty($GVSettings) ? $GVSettings : 'environmentVariables';
+
+    // Define variable if the global variables exist
+    $globalVariables = craft()->config->get($GVName) !== null ? craft()->config->get($GVName) : null;
+
+    if (!is_null($globalVariables)) {
+      $globals = array_merge($globalVariables, $globals);
+    }
+
+    // If theese don't exist, add them too
+    $fallbackVariables = array(
+      'videos'   => "/assets/images",
+      'images'   => "/assets/videos",
+      'js'       => "/assets/js",
+      'css'      => "/assets/css"
+    );
+
+    return array_unique(array_merge($fallbackVariables, $globals), SORT_REGULAR);
+
   }
 }

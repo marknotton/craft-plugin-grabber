@@ -1,10 +1,11 @@
 {% import "_includes/forms" as forms %}
-<h2>Settings File Location</h2>
+<h2>Global Variable Config Settings</h2>
 {{ forms.textField({
-  label: "Enter the directory your settings twig file is stored. This will be relative to your craft/templates directory. Default is '_includes/settings.twig'."|t,
-  id: 'directory',
-  name: 'directory',
-  placeholder: '_includes/settings.twig',
-  value: settings.directory,
-  errors: settings.getErrors('directory'),
+  label: "In your [General Config][1] you can define an array of global variables. Each top-level element in this array will be passed as a global variable for use in your Twig code (without having to target your config file). Define the array name your global variables will live in:
+  [1]: https://craftcms.com/docs/config-settings"|markdown,
+  id: 'globalVariablesName',
+  name: 'globalVariablesName',
+  placeholder: 'environmentVariables',
+  value: settings.globalVariablesName,
+  errors: settings.getErrors('globalVariablesName'),
 }) }}

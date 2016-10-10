@@ -20,11 +20,11 @@ Grabber adds numerous methods to quickly grab useful content
 
 Grab an array of commonly used Entry data by defining just the id or slug and the entries given section if required.
 
-| # | Parameter            | Type              | Default          | Description
---- | -------------------- | ----------------- | ---------------- | -----------
-| 1 | entry slug or ID     | string or integer | null             | Entry slug or ID
-| 2 | section handle or ID | string or integer | current entry ID | [optional] The section handle or ID
-| 3 | true or false        | boolean           | true             | [optional] If ```true```, the entire given entry object will be returned, rather than common attributes. If ```false```, a cached version will not be used.
+| # | Parameter            | Type              | Default          | Optional | Description
+--- | -------------------- | ----------------- | ---------------- | -------- | -----------
+| 1 | entry slug or ID     | string or integer | null             | No       | Entry slug or ID
+| 2 | section handle or ID | string or integer | current entry ID | Yes      | The section handle or ID
+| 3 | true or false        | boolean           | true             | Yes      | If ```true```, the entire given entry object will be returned, rather than common attributes. If ```false```, a cached version will not be used.
 
 The first time an entry is queried, it will be cached. So any additional queries to the same entry per page load will revert to the cached version.
 
@@ -89,11 +89,11 @@ If the section can not be found; the given data will be used to make a 'best-gue
 
 Grab a specific field from a particular entry.
 
-| # | Parameter            | Type              | Default          | Description
---- | -------------------- | ----------------- | ---------------- | -----------
-| 1 | field slug           | string            | null             | The field slug
-| 2 | entry slug or ID     | string or integer | current entry ID | Should be either the entry handle or id.
-| 3 | section handle or ID | string or integer | null             | [optional] The third parameter is optional and is for the section type. Results will be more accurate if the section is defined since it's possible to have the same entry slug across multiple sections. Omitting this will return the first instance of a successful entry handle match.
+| # | Parameter            | Type              | Default          | Optional | Description
+--- | -------------------- | ----------------- | ---------------- | -------- | -----------
+| 1 | field slug           | string            | null             | No       | The field slug
+| 2 | entry slug or ID     | string or integer | current entry ID | Yes      | Should be either the entry handle or id.
+| 3 | section handle or ID | string or integer | null             | Yes      | The third parameter is optional and is for the section type. Results will be more accurate if the section is defined since it's possible to have the same entry slug across multiple sections. Omitting this will return the first instance of a successful entry handle match.
 
 ### Example
 ```
@@ -163,10 +163,10 @@ Grabs the current page title and fallbacks to the homepage is nothing is found. 
 
 Grab global data from a specific set. This will perform a few checks to ensure the global exists before returning anything.
 
-| # | Parameter        | Type              | Description
---- | ---------------- | ----------------- | -----------
-| 1 | Field slug       | string            | The field slug
-| 2 | Set handle or ID | string or integer | [optional] The section handle or ID
+| # | Parameter        | Type              | Optional | Description
+--- | ---------------- | ----------------- | -------- | -----------
+| 1 | Field slug       | string            | No       | The field slug
+| 2 | Set handle or ID | string or integer | Yes      | The section handle or ID
 
 ### Example
 ```
@@ -183,10 +183,10 @@ Grab global data from a specific set. This will perform a few checks to ensure t
 
 Grabs an entry link if it exists and is enabled, and outputs a correctly formatted ```a``` tag.
 
-| # | Parameter         | Type              | Description
---- | ----------------- | ----------------- | -----------
-| 1 | Entry slug or ID  | string or integer | Entry slug or ID
-| 2 | Array of settings | array             | [optional] Array of optional settings to refine the output
+| # | Parameter         | Type              | Optional | Description
+--- | ----------------- | ----------------- | -------- | -----------
+| 1 | Entry slug or ID  | string or integer | No       | Entry slug or ID
+| 2 | Array of settings | array             | Yes      | Array of optional settings to refine the output
 
 These are the associative array options:
 
@@ -262,12 +262,12 @@ Returns a boolean after checking if a plugin is installed only.
 
 Returns the current page title and site name in a 75 character limit format suitable for SEO.
 
-| # | Parameter            | Type              | Default          | Description
---- | -------------------- | ----------------- | ---------------- | -----------
-| 1 | page title           | string            | null             | [optional] Will attempt to grab the current entry title. Or a string can be used as a title instead.
-| 2 | separator            | string            | ```|```          | [optional] Define a string that will sit between the site name and page title. Usually a single special character.
-| 3 | site name            | string            | siteName         | [optional] The default siteName will be used if one is not provided.
-| 4 | order                | boolean           | true             | [optional] If ```true```, the entry title will come first. If ```false```, the site name will come first.
+| # | Parameter            | Type              | Default          | Optional | Description
+--- | -------------------- | ----------------- | ---------------- | -------- | -----------
+| 1 | page title           | string            | null             | Yes      | Will attempt to grab the current entry title. Or a string can be used as a title instead.
+| 2 | separator            | string            | ```|```          | Yes      | Define a string that will sit between the site name and page title. Usually a single special character.
+| 3 | site name            | string            | siteName         | Yes      | The default siteName will be used if one is not provided.
+| 4 | order                | boolean           | true             | Yes      | If ```true```, the entry title will come first. If ```false```, the site name will come first.
 
 #### Example 1:
 ```

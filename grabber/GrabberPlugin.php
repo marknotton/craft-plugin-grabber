@@ -35,38 +35,41 @@ class GrabberPlugin extends BasePlugin {
     return 'https://raw.githubusercontent.com/marknotton/craft-plugin-grabber/master/grabber/releases.json';
   }
 
-  public function addTwigExtension() {
-    Craft::import('plugins.grabber.twigextensions.link');
-    Craft::import('plugins.grabber.twigextensions.grabber_globals');
+  public function getSettingsHtml() {
+    return craft()->templates->render('grabber/settings', array(
+      'settings' => $this->getSettings()
+    ));
+  }
+
+  protected function defineSettings() {
     return array(
-      new link(),
-      new grabber_globals()
+      'globalVariablesName' => array(AttributeType::String, 'default' => ''),
     );
   }
 
-  // public function getSettingsHtml() {
-  //   return craft()->templates->render('grabber/settings', array(
-  //     'settings' => $this->getSettings()
-  //   ));
-  // }
-
-  // protected function defineSettings() {
-  //   return array(
-  //     'directory' => array(AttributeType::String, 'default' => ''),
-  //   );
-  // }
+  public function addTwigExtension() {
+    Craft::import('plugins.grabber.twigextensions.link');
+    Craft::import('plugins.grabber.twigextensions.Grabber_Globals');
+    return array(
+      new link(),
+      new Grabber_Globals()
+    );
+  }
 
   public function init() {
-    if (!craft()->isConsole() && !craft()->request->isCpRequest())  {
 
+    if (!craft()->isConsole() && !craft()->request->isCpRequest())  {
       craft()->templates->hook('grabber', function(&$context) {
         if (isset($context['classes'])) {
           craft()->grabber_classes->extraClasses = $context['classes'];
         }
-        // if (isset($context['settings'])) {
-        //   craft()->grabber_settings->settings = $context['settings'];
-        // }
       });
+
+      // $var = 'something';
+      // $twig = craft()->templates->getTwig(null, ['safe_mode' => false]);
+      // $twig->addGlobal('var', $var);
+
+
     }
   }
 };
