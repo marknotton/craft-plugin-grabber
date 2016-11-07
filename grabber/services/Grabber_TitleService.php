@@ -4,7 +4,6 @@ namespace Craft;
 class Grabber_TitleService extends BaseApplicationComponent {
 
   public function title($title = null, $seperator = "|", $sitename = null, $order = true) {
-
     // Titles shuold not excede 75 characters in total.
     $titleLengthLimit = 75;
 
