@@ -6,6 +6,7 @@ Grabber adds numerous methods to quickly grab useful content
 
 ##Table of Contents
 
+- [Environmental Variables](#environmental-variables)
 - [Entry](#entry)
 - [Section](#section)
 - [Content](#content)
@@ -16,6 +17,10 @@ Grabber adds numerous methods to quickly grab useful content
 - [Plugin](#plugin)
 - [Title](#title)
 
+## Environmental Variables to Global Variables
+
+Any [Environmental Variables](https://craftcms.com/docs/config-settings#environmentVariables) set in the general config file will be made accessible as a global variable within your Twig templating. You can disable this in the plugins settings.
+
 ## Entry
 
 Grab an array of commonly used Entry data by defining just the id or slug and the entries given section if required.
@@ -24,7 +29,7 @@ Grab an array of commonly used Entry data by defining just the id or slug and th
 --- | -------------------- | ----------------- | ---------------- | -------- | -----------
 | 1 | entry slug or ID     | string or integer | null             | No       | Entry slug or ID
 | 2 | section handle or ID | string or integer | current entry ID | Yes      | The section handle or ID
-| 3 | true or false        | boolean           | true             | Yes      | If ```true```, the entire given entry object will be returned, rather than common attributes. If ```false```, a cached version will not be used.
+| 3 | true or false        | boolean           | false            | Yes      | If ```true```, the entire given entry object will be returned, rather than common attributes. If ```false```, a cached version will be used.
 
 The first time an entry is queried, it will be cached. So any additional queries to the same entry per page load will revert to the cached version.
 
@@ -47,7 +52,7 @@ By default, the following data will be collected:
 
 If the entry can not be found; the given data will be used to make a 'best-guess' fallback. This is ideal for the likes of error pages, or category/tag templates.
 
-### Example
+### Examples
 
 ```
 {{ grab.entry(2)['title'] }}
@@ -103,7 +108,7 @@ Grab a specific field from a particular entry.
 
 ## Classes
 
-This service will automatically grab a list of useful class names bespoke to users current page, and return them as a string:
+This will automatically grab a list of useful class names bespoke to users current page, and return them as a string:
 
 | Example        | Description
  --------------- | ---------------------
@@ -136,11 +141,6 @@ If you have my [Browser](https://github.com/marknotton/craft-plugin-browser) plu
 ### Additional Classes
 
 If you want to add additional classes from the template side of things; you can define a twig variable called *classes*. Make sure to add the grabber hook after the classes variable.
-
-### Todo
-
-- Add 'tag' or 'category' if on one of those page types.
-- Add tag slug or category slug if on one of those page types.
 
 ```
 {% set classes = "extra-class" %}
@@ -181,7 +181,7 @@ Grab global data from a specific set. This will perform a few checks to ensure t
 
 ## Link
 
-Grabs an entry link if it exists and is enabled, and outputs a correctly formatted ```a``` tag.
+Grabs an entry link if it exists and is enabled, and outputs a correctly formatted ```<a>``` tag.
 
 | # | Parameter         | Type              | Optional | Description
 --- | ----------------- | ----------------- | -------- | -----------
@@ -236,7 +236,7 @@ Similar to grab.link, this twig extension allows you to wrap any content in a li
 {{ entry.featured.first()|link('contact') }}
 ```
 
-#### Example 4: Output
+#### Example 3: Output
 ```
 <a href="/contact"><img src="..." alt="..."></a>
 ```
@@ -278,3 +278,5 @@ Returns the current page title and site name in a 75 character limit format suit
 ```
 {{ grab.title('Welcome to my site', '-', false) }}
 ```
+
+If you manually declare a title in your twig, that will be used and overwrite any other checks. The ```{% hook 'grabber' %}``` hook needs to be on the page for this to work.

@@ -35,41 +35,62 @@ class GrabberPlugin extends BasePlugin {
     return 'https://raw.githubusercontent.com/marknotton/craft-plugin-grabber/master/grabber/releases.json';
   }
 
+  public function registerSiteRoutes() {
+    return array(
+      'api/everything' => array('action' => 'grabber/everything'),
+    );
+  }
+
   public function getSettingsHtml() {
-    return craft()->templates->render('grabber/settings', array(
-      'settings' => $this->getSettings()
-    ));
+    if (!craft()->plugins->getPlugin('settings')) {
+      return craft()->templates->render('grabber/settings', array(
+        'settings' => $this->getSettings()
+      ));
+    } else {
+      return false;
+    }
   }
 
   protected function defineSettings() {
     return array(
-      'globalVariablesName' => array(AttributeType::String, 'default' => ''),
+      'envVarsToGlobalVars' => array(AttributeType::Bool, 'default' => true),
     );
   }
 
   public function addTwigExtension() {
+    if (!craft()->isConsole() && craft()->request->isSiteRequest() && craft()->plugins->getPlugin('settings')) {
+      craft()->settings->addGlobals($this->getGlobals(), 'grabber');
+    } else {
+      Craft::import('plugins.grabber.twigextensions.Grabber_Globals');
+      return new Grabber_Globals();
+    }
+
     Craft::import('plugins.grabber.twigextensions.link');
-    Craft::import('plugins.grabber.twigextensions.Grabber_Globals');
+    return new link();
+  }
+
+  public $title;
+
+  public function getGlobals() {
     return array(
-      new link(),
-      new Grabber_Globals()
+      'grab'  => craft()->grabber,
+      'title' => $this->title
     );
   }
 
   public function init() {
-
     if (!craft()->isConsole() && !craft()->request->isCpRequest())  {
+
+      $this->title = craft()->grabber_entry->entry(null, null, false)['title'];
+
       craft()->templates->hook('grabber', function(&$context) {
         if (isset($context['classes'])) {
           craft()->grabber_classes->extraClasses = $context['classes'];
         }
+        if (isset($context['title'])) {
+          $this->title = $context['title'];
+        }
       });
-
-      // $var = 'something';
-      // $twig = craft()->templates->getTwig(null, ['safe_mode' => false]);
-      // $twig->addGlobal('var', $var);
-
-
     }
   }
 };

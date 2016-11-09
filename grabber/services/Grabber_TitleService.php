@@ -4,7 +4,6 @@ namespace Craft;
 class Grabber_TitleService extends BaseApplicationComponent {
 
   public function title($title = null, $seperator = "|", $sitename = null, $order = true) {
-
     // Titles shuold not excede 75 characters in total.
     $titleLengthLimit = 75;
 
@@ -17,7 +16,7 @@ class Grabber_TitleService extends BaseApplicationComponent {
     $seperator = ' '.$seperator.' ';
     $seperatorLength = mb_strlen($seperator);
 
-    $title = is_null($title) ? craft()->grabber_entry->entry(null, null, false)['title'] : $title;
+    $title = is_null($title) ? craft()->plugins->getPlugin('grabber')->title : $title;
 
     if ( strtolower($title) == 'home' || strtolower($title) == 'homepage' || empty($title) ) {
       $title = null;
