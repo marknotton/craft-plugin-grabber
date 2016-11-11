@@ -33,8 +33,8 @@ class Grabber_SectionService extends BaseApplicationComponent {
           'handle' => $section->handle,
           'slug' => $section->handle,
           'type' => $section->type,
-          'url' => $section->handle, // TODO
-          'uri' => $section->handle, // TODO
+          'url' => ElementHelper::createSlug($section->handle), // TODO
+          'uri' => ElementHelper::createSlug($section->handle), // TODO
           // 'association' => $section->association,
         ];
 
@@ -50,8 +50,8 @@ class Grabber_SectionService extends BaseApplicationComponent {
             'id' => null,
             'title' => preg_replace('/\s+/', ' ', ucwords($title)),
             'slug' => preg_replace('/\s+/', '-', $id),
-            'url' => '/'.$id.'/',
-            'uri' => $id,
+            'url' => '/'.ElementHelper::createSlug($id).'/',
+            'uri' => ElementHelper::createSlug($id),
             'status' => 'live',
             'level' => false,
             'parent' => false,
