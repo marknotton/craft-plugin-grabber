@@ -65,8 +65,8 @@ class GrabberPlugin extends BasePlugin {
       return new Grabber_Globals();
     }
 
-    Craft::import('plugins.grabber.twigextensions.link');
-    return new link();
+    Craft::import('plugins.grabber.twigextensions.Link');
+    return new Link();
   }
 
   public $title;

@@ -3,8 +3,6 @@ namespace Craft;
 
 class Grabber_LinkService extends BaseApplicationComponent {
 
-  // Used to add a single ID to the body. Strongly assists with CSS styling for specific pages, amongst other things
-
   // {{ grab.link('contact', {
   //    'relative' : true,
   //    'classes'  : 'someClass',
