@@ -83,7 +83,7 @@ class Grabber_LinkService extends BaseApplicationComponent {
     } else {
 
       $title = is_null($title) ? $entry['title'] : $title;
-      $url = $relative ? $entry['uri'] : $entry['url'];
+      $url = ElementHelper::createSlug($relative ? $entry['uri'] : $entry['url']);
 
       // $url = explode('/', $url);
       //
