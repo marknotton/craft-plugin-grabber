@@ -75,9 +75,14 @@ class Link extends \Twig_Extension {
 
     $entry = craft()->grabber_entry->entry($id, $section);
     $title = is_null($title) ? $entry['title'] : $title;
+    $url = ElementHelper::createSlug($relative ? $entry['uri'] : $entry['url']);
+
+    if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+      $url = "http://" . $url;
+    }
 
     $link  = '<a ';
-    $link .= 'href="'.($relative ? $entry['uri'] : $entry['url']).'"';
+    $link .= 'href="'.$url.'"';
     if ($classes) { $link .= ' class="'.$classes.'"'; }
     if ($target) { $link .= ' target="'.$target.'"'; }
     $link .= ' title="'.$title.'"';
@@ -86,5 +91,7 @@ class Link extends \Twig_Extension {
     $link .= '</a>';
 
     return $link;
+
+
   }
 }
