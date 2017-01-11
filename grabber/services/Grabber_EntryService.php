@@ -10,7 +10,7 @@ class Grabber_EntryService extends BaseApplicationComponent {
     $id      = null;
     $section = null;
     $full    = false;
-    $cacheIt = false;
+    $cacheIt  = false;
 
     // Atleast one single string arugment should be passed
     if ( func_num_args() >= 1 ){

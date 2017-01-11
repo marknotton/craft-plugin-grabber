@@ -18,7 +18,13 @@ class GrabberService extends BaseApplicationComponent {
 
   public function entry() {
     $args = func_get_args();
-    return call_user_func_array(array(craft()->grabber_entry, 'entry'), $args);
+    array_unshift($args, "entry");
+    return call_user_func_array(array(craft()->grabber_data, 'data'), $args);
+  }
+
+  public function data() {
+    $args = func_get_args();
+    return call_user_func_array(array(craft()->grabber_data, 'data'), $args);
   }
 
   public function page() {

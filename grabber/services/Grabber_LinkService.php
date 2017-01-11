@@ -76,29 +76,17 @@ class Grabber_LinkService extends BaseApplicationComponent {
       }
     }
 
-    $entry = craft()->grabber_entry->entry($id, $section);
-
     if ($justUrl) {
 
+      $entry = craft()->grabber_data->entry($id, $section);
       return $relative ? $entry['uri'] : $entry['url'];
 
     } else {
-
+      $entry = craft()->grabber_entry->entry($id, $section);
       $title = is_null($title) ? $entry['title'] : $title;
-      $url = $relative ? $entry['uri'] : $entry['url'];
-
-      // $url = explode('/', $url);
-      //
-      // $urlSegments = [];
-      //
-      // foreach($url as $segment) {
-      //   array_push($urlSegments, ElementHelper::createSlug($segment));
-      // }
-      //
-      // $url = implode('/', $urlSegments);
 
       $link  = '<a ';
-      $link .= 'href="'.$url.'"';
+      $link .= 'href="'.($relative ? $entry['uri'] : $entry['url']).'"';
       if ($classes) { $link .= ' class="'.$classes.'"'; }
       if ($target) { $link .= ' target="'.$target.'"'; }
       $link .= ' title="'.$title.'"';
