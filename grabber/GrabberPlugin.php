@@ -41,9 +41,19 @@ class GrabberPlugin extends BasePlugin {
     );
   }
 
+  public function getSettingsHtml() {
+    if (!craft()->plugins->getPlugin('settings')) {
+      return craft()->templates->render('grabber/settings', array(
+        'settings' => $this->getSettings()
+      ));
+    } else {
+      return false;
+    }
+  }
+
   protected function defineSettings() {
     return array(
-      'globalVariablesName' => array(AttributeType::String, 'default' => ''),
+      'envVarsToGlobalVars' => array(AttributeType::Bool, 'default' => true),
     );
   }
 

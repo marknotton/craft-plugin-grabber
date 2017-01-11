@@ -1,11 +1,10 @@
 {% import "_includes/forms" as forms %}
-<h2>Global Variable Config Settings</h2>
-{{ forms.textField({
-  label: "In your [General Config][1] you can define an array of global variables. Each top-level element in this array will be passed as a global variable for use in your Twig code (without having to target your config file). Define the array name your global variables will live in:
-  [1]: https://craftcms.com/docs/config-settings"|markdown,
-  id: 'globalVariablesName',
-  name: 'globalVariablesName',
-  placeholder: 'environmentVariables',
-  value: settings.globalVariablesName,
-  errors: settings.getErrors('globalVariablesName'),
+{{ forms.lightswitchField({
+  label : "Environmental Variables to Global Variables",
+  instructions: "Any [Environmental Variables][1] set in the general config file will be made accessible as a global variable within your Twig templating.
+  [1]: https://craftcms.com/docs/config-settings#environmentVariables"|markdown,
+  id: 'envVarsToGlobalVars',
+  name: 'envVarsToGlobalVars',
+  errors: settings.getErrors('envVarsToGlobalVars'),
+  on: (settings.envVarsToGlobalVars is defined) ? settings.envVarsToGlobalVars : 0
 }) }}

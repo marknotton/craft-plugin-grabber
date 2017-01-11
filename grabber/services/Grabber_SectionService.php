@@ -33,8 +33,8 @@ class Grabber_SectionService extends BaseApplicationComponent {
           'handle' => $section->handle,
           'slug' => $section->handle,
           'type' => $section->type,
-          'url' => $section->handle, // TODO
-          'uri' => $section->handle, // TODO
+          'url' => ElementHelper::createSlug($section->handle), // TODO
+          'uri' => ElementHelper::createSlug($section->handle), // TODO
           // 'association' => $section->association,
         ];
 
@@ -50,8 +50,8 @@ class Grabber_SectionService extends BaseApplicationComponent {
             'id' => null,
             'title' => preg_replace('/\s+/', ' ', ucwords($title)),
             'slug' => preg_replace('/\s+/', '-', $id),
-            'url' => '/'.$id.'/',
-            'uri' => $id,
+            'url' => '/'.ElementHelper::createSlug($id).'/',
+            'uri' => ElementHelper::createSlug($id),
             'status' => 'live',
             'level' => false,
             'parent' => false,
@@ -64,23 +64,4 @@ class Grabber_SectionService extends BaseApplicationComponent {
     return $this->cacheSection[$cache_name];
   }
 
-  public function search($section) {
-    // Check if given section is a string
-    if (is_string($section)) {
-      // Loop through all available sections until one matches
-      $sections = craft()->sections->getAllSections();
-      while (list(, $sec) = each($sections)) {
-        // If there is a space in the string, slugify it.
-        $section = preg_match('/\s/',$section) ? ElementHelper::createSlug($section) : $section;
-        if ($sec->handle == $section) {
-          return $sec;
-        }
-      }
-    } else if (is_numeric($section)) {
-      // If $section is a number, assume this is an ID number
-      return craft()->sections->getSectionById($section);
-    } else {
-      return false;
-    }
-  }
 }
