@@ -77,7 +77,9 @@ class Link extends \Twig_Extension {
     $title = is_null($title) ? $entry['title'] : $title;
     $url = ElementHelper::createSlug($relative ? $entry['uri'] : $entry['url']);
 
-    if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+    if (empty($url)) {
+      $url = '/';
+    } else if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
       $url = "http://" . $url;
     }
 
