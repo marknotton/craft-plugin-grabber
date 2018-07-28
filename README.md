@@ -2,9 +2,11 @@
 
 # Grabber *for Craft CMS*
 
+> This plugin is no longer maintained. I'm committing to Craft 3 development only. Feel free to use the source code as you like. If you're looking for a Craft 3 version of this plugin, it's likely I've merged parts or all of this plugin into my [Helpers module.](https://github.com/marknotton/craft-module-helpers)
+
 Grabber adds numerous methods to quickly grab useful content
 
-##Table of Contents
+## Table of Contents
 
 - [Environmental Variables](#environmental-variables)
 - [Entry](#entry)
